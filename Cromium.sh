@@ -7,7 +7,7 @@ YELLOW='\033[0;33m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
-curl -s https://raw.githubusercontent.com/CryptoAirdropHindi/Tools/refs/heads/main/logo.sh | bash
+curl -s https://raw.githubusercontent.com/airdropbomb/Tools/refs/heads/main/logo.sh | bash
 echo "Starting Auto Chromium"
 sleep 5
 
