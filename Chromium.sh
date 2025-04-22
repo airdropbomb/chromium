@@ -75,25 +75,9 @@ PASSWORD=$(openssl rand -hex 12)
 log "INFO" "Generated Username: $CUSTOM_USER"
 log "INFO" "Generated Password: $PASSWORD"
 
-check_port() {
-    local PORT=$1
-    if sudo lsof -i -P -n | grep LISTEN | grep ":$PORT " &> /dev/null; then
-        return 1
-    else
-        return 0
-    fi
-}
-
-START_PORT=3000
-while true; do
-    check_port $START_PORT
-    if [ $? -eq 0 ]; then
-        PORT_1=$START_PORT
-        PORT_2=$((START_PORT+1))
-        break
-    fi
-    START_PORT=$((START_PORT+2))
-done
+# Directly set ports to 3050 and 3051
+PORT_1=3050
+PORT_2=3051
 
 log "INFO" "Using ports: $PORT_1 and $PORT_2"
 sudo ufw allow $PORT_1/tcp
@@ -119,8 +103,8 @@ services:
     volumes:
       - /root/chromium/config:/config
     ports:
-      - $PORT_1:3050
-      - $PORT_2:3051
+      - $PORT_1:3000
+      - $PORT_2:3001
     shm_size: "1gb"
     restart: unless-stopped
 EOF
